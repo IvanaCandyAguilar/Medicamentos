@@ -29,7 +29,7 @@ for i in medicamento:
         break
 count +=1
 
-print(lista_medicamentos)
+#print(lista_medicamentos)
 
 #PRECIO
 
@@ -49,9 +49,10 @@ for j in precio:
     else:
         break
 countj +=1
-print(precio)
 
 print(lista_precios)
+
+
 
 #df=pd.DataFrame({'Medicamento':lista_medicamentos,'Precio':lista_precios},index=list(range(1,20)))
 
