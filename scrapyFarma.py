@@ -1,81 +1,37 @@
+import re
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 
+
+
 url= 'https://farmacorp.com/collections/salud-y-medicamentos/Salud-Respiratoria-y-Gripe'
 page = requests.get(url)
-soup = BeautifulSoup(page.content,'html.parser')
 
-#IMAGEN
-#PRECIO
-#CATEGORIA
+htmlText=page.text
 
-#MEDICAMENTO
+# Comprobamos que la petición nos devuelve un Status Code = 200
 
-medicamento=soup.find_all('h2', class_="productitem--title")
+statusCode= page.status_code
+if statusCode == 200:
 
-lista_medicamentos = list()
+    # Pasamos el contenido HTML de la web a un objeto BeautifulSoup()
+    soup = BeautifulSoup(page.text,'html.parser')
+    # Obtenemos todos los divs donde están las entradas
+    entradas = soup.find_all('div', {'class': 'productitem--info'})
 
-count=0
+    # Recorremos todas las entradas para extraer
+    #MEDICAMENTO
+    #IMAGEN
+    #PRECIO
+    #CATEGORIA
 
-for i in medicamento:
-    if count<20:
-            med= i.text
-            med= med.replace('\n','')
-            med =med.replace('  ','')
-            lista_medicamentos.append(med)
-
-    else:
-        break
-count +=1
-
-#print(lista_medicamentos)
-
-#PRECIO
-
-precio=soup.find_all('span', class_="money")
-
-lista_precios = list()
-
-countj=0
-
-for j in precio:
-    if countj<20:
-            precio= j.text
-            precio= precio.replace('\n','')
-            precio =precio.replace('  ','')
-            precio = precio.replace(',','.')
-            lista_precios.append(precio)
-    else:
-        break
-countj +=1
-
-print(lista_precios)
-
-
-
-#df=pd.DataFrame({'Medicamento':lista_medicamentos,'Precio':lista_precios},index=list(range(1,20)))
-
-#print(df)
-
-#df.to_csv('Clasificacion.csv',index=False)
-
-
-
-#url = 'https://www.promofarma.com'
-#page = requests.get(url)
-#soup = BeautifulSoup(page.content,'html.parser')
-
-#medicamento = soup.find_all('h3',data_='productName')
-
-#ListaMedicamentos = list()
-#<h3 itemprop="name" data-qa-ta="productName">Star Care Mascarilla FFP2 Negra 10uds</h3>
-#count=0
-#for i in medicamento:
-#    if count<20:
-#        ListaMedicamentos.append(i.text)
-#    else:
- #       break
-  #  count+=1
-
-#print(medicamento)
+    for h, entrada in enumerate(entradas):
+        #medicamento = entrada.find('a')
+        medicamento=entrada.find('h2',{'class': 'productitem--title'}).getText()
+        precio = entrada.find('span',{'class':'money'}).getText()
+        # Imprimo el Medicamento , Precio de las entradas
+        print(h + 1, medicamento,precio)
+else:
+    # Si ya no existe la página y me da un 400
+    print ("Status Code %d" % statusCode)
