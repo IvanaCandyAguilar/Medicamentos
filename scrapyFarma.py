@@ -27,11 +27,18 @@ if statusCode == 200:
     #CATEGORIA
 
     for h, entrada in enumerate(entradas):
-        #medicamento = entrada.find('a')
         medicamento=entrada.find('h2',{'class': 'productitem--title'}).getText()
         precio = entrada.find('span',{'class':'money'}).getText()
         # Imprimo el Medicamento , Precio de las entradas
-        print(h + 1, medicamento,precio)
+        medicamento_textoLimpio=medicamento.replace('\n','').replace('\r','').replace('\t','')
+        precio_textoLimpio=precio.replace('\n','').replace('\r','').replace('\t','')
+        print(h + 1, medicamento_textoLimpio,precio)
 else:
     # Si ya no existe la página y me da un 400
     print ("Status Code %d" % statusCode)
+
+#Funcion para limpiar los espacios y saltos de linea
+def __limpiarTexto(texto):
+    nuevoTexto=texto.replace('\n','').replace('\r','').replace('\t',).strip()
+    return (nuevoTexto)
+
