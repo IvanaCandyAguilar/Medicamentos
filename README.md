@@ -7,6 +7,14 @@ En el contexto actual que vivimos como es la pandemia que inicio con el _Covid 1
 
 ## Miembros del equipo
 
-La practica se ha realizado de forma indivual en todas sus etapas por **Ivana Lorena Candy Aguilar**.
+La práctica se ha realizado de forma indivual en todas sus etapas por **Ivana Lorena Candy Aguilar**.
 
 ## Ficheros del código fuente
+
+* **scrapyFarma.py**: contiene la implementación de la codigo para WebScraping y tiene como producto un .csv generado
+* **PreciosMedicamentosBolivia**: es el archivo que contiene los datos de medicamentos y precios de Bolivia.
+
+## Recursos
+
+1. Lawson, R. (2015). _Web Scraping with Python_. Packt Publishing Ltd. Chapter 2. Scraping the Data.
+2. Subirats, L., Calvo, M. (2019). _Web Scraping_. Editorial UOC.
