@@ -42,7 +42,8 @@ else:
     print ("Status Code %d" % statusCode)
 
 df=pd.DataFrame({'Medicamento':listadoMedicamentos,'Precio':listadoPrecios})
-print(df)
+df.to_csv('MedicamentosScraper.csv')
+#print(df)
 
 #Funcion para limpiar los espacios y saltos de linea
 def __limpiarTexto(texto):
