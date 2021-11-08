@@ -25,6 +25,8 @@ if statusCode == 200:
     #IMAGEN
     #PRECIO
     #CATEGORIA
+    listadoMedicamentos=list()
+    listadoPrecios=list()
 
     for h, entrada in enumerate(entradas):
         medicamento=entrada.find('h2',{'class': 'productitem--title'}).getText()
@@ -32,10 +34,15 @@ if statusCode == 200:
         # Imprimo el Medicamento , Precio de las entradas
         medicamento_textoLimpio=medicamento.replace('\n','').replace('\r','').replace('\t','')
         precio_textoLimpio=precio.replace('\n','').replace('\r','').replace('\t','')
-        print(h + 1, medicamento_textoLimpio,precio)
+       # print(h + 1, medicamento_textoLimpio,precio)
+        listadoMedicamentos.append(medicamento_textoLimpio)
+        listadoPrecios.append(precio_textoLimpio)
 else:
     # Si ya no existe la página y me da un 400
     print ("Status Code %d" % statusCode)
+
+df=pd.DataFrame({'Medicamento':listadoMedicamentos,'Precio':listadoPrecios})
+print(df)
 
 #Funcion para limpiar los espacios y saltos de linea
 def __limpiarTexto(texto):
