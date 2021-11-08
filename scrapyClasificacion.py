@@ -49,6 +49,74 @@ df.to_csv('Clasificacion.csv',index=False)
 
 
 
+import re
+from bs4 import BeautifulSoup
+import requests
+
+import pandas as pd
+
+url= 'https://farmacorp.com/collections/salud-y-medicamentos/Salud-Respiratoria-y-Gripe'
+page = requests.get(url)
+soup = BeautifulSoup(page.content,'html.parser')
+
+#IMAGEN
+#PRECIO
+#CATEGORIA
+
+#MEDICAMENTO
+
+medicamento=soup.find_all('h2', class_="productitem--title")
+
+lista_medicamentos = list()
+
+count=0
+
+for i in medicamento:
+    if count<20:
+            med= i.text
+            med= med.replace('\n','')
+            med =med.replace('  ','')
+            lista_medicamentos.append(med)
+            count +=1
+    else:
+        break
+
+#print(lista_medicamentos)
+
+#PRECIOS
+
+precio=soup.find_all('span', class_="money")
+
+lista_precios = list()
+
+countj=0
+
+for j in precio:
+    if countj<20:
+            precio2= j.text
+            print(precio2)
+            print(countj)
+            precio2= precio2.replace('\n','')
+            precio2 =precio2.replace('  ','')
+            precio2 = precio2.replace(',','.')
+            countj +=1
+           # precio = precio.sub(precio,precio)
+            #lista_precios.append(precio2)
+    else:
+        break
+
+print(lista_precios)
+
+
+
+#df=pd.DataFrame({'Medicamento':lista_medicamentos,'Precio':lista_precios},index=list(range(1,20)))
+
+#print(df)
+
+#df.to_csv('Clasificacion.csv',index=False)
+
+
+
 #url = 'https://www.promofarma.com'
 #page = requests.get(url)
 #soup = BeautifulSoup(page.content,'html.parser')
