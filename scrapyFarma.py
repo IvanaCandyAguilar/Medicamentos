@@ -35,9 +35,10 @@ if statusCode == 200:
     listadoPrecios=list()
 
     for h, entrada in enumerate(entradas):
+         # Extraemos mediante una busqueda los datos de medicamento y precio
         medicamento=entrada.find('h2',{'class': 'productitem--title'}).getText()
         precio = entrada.find('span',{'class':'money'}).getText()
-        # Imprimo el Medicamento , Precio de las entradas
+        # Limpiamos los textos de Medicamento y Precio
         medicamento_textoLimpio=__limpiarTexto(medicamento)
         precio_textoLimpio=__limpiarTexto(precio)
         # Aderiamos los datos a cada lista
@@ -47,8 +48,8 @@ else:
     # Si ya no existe la página y me da un 400
     print ("Status Code %d" % statusCode)
 
-df=pd.DataFrame({'Fecha':fechahoy,'Medicamento':listadoMedicamentos,'Precio':listadoPrecios},index=list(range(1,25)))
-df.to_csv('MedicamentosScraper.csv')
+df=pd.DataFrame({'Fecha':fechahoy,'Medicamento':listadoMedicamentos,'Precio_Unitario':listadoPrecios},index=list(range(1,25)))
+df.to_csv('PreciosMedicamentosBolivia.csv')
 
 
 
