@@ -12,7 +12,6 @@ La práctica se ha realizado de forma indivual en todas sus etapas por **Ivana L
 ## Ficheros del código fuente
 
 * **scrapyFarma.py**: contiene la implementación de la codigo para WebScraping y tiene como producto un .csv generado
-* **PreciosMedicamentosBolivia**: es el archivo que contiene los datos de medicamentos y precios de Bolivia.
 
 ## Recursos
 
